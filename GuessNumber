@@ -1,0 +1,75 @@
+ackage scorekeeper;
+
+
+import scorekeeper.Dialogs;
+
+
+
+/**
+ * GuessNumber.java - Create a simple game (guess a number between 1-3 starting 
+ * with 10 points) and use the scorekeeper class to keep score, and keep playing
+ * or not
+ *
+ * @author Windows
+ */
+public class GuessNumber {
+    
+    /**
+     * main method for the project
+     * 
+     * @param args 
+     */
+    public static void main(String[] args){
+        final int STARTING_POINT = 10;
+        ScoreKeeper scoreKeeper = new ScoreKeeper (STARTING_POINT);
+        Dialogs.title = "Guess a number";
+        Dialogs.output("Welcome to " + Dialogs.title);
+        do{
+           playRound(scoreKeeper);
+           if (scoreKeeper.keepPlaying() == false) {
+               Dialogs.output("Sorry , you are out of points");
+               end();
+           }  
+           } while (Dialogs.playAgain());
+           end();
+        }
+        
+        /**
+         * Plays a round of guessing a number and shows the user the result
+         * 
+         * @param scoreKeeper 
+         */
+        private static void playRound (ScoreKeeper scoreKeeper) {
+            int playerNumber = Dialogs.inputInteger("Pick a number between 1 and 3");
+            while (Numbers.inRange(playerNumber, 1, 3) == false) {
+                Dialogs.output("Error, number not inside range");
+                playerNumber = Dialogs.inputInteger("Pick a number between 1 and 3");
+            }
+            int computerNumber = Numbers.random(1, 3);
+            if (playerNumber == computerNumber) {
+                scoreKeeper.increase(1);
+                Dialogs.output("You picked "           + playerNumber   + "\n" +
+                               "The computer picked "  + computerNumber + "\n" +
+                               "You win!"                               + "\n" +
+                               "You have " + scoreKeeper.getPoints() + " points!");
+            }
+            else{
+                scoreKeeper.decrease(1);
+                Dialogs.output("You picked "           + playerNumber   + "\n" +
+                               "The computer picked "  + computerNumber + "\n" +
+                               "You lose!"                               + "\n" +
+                               "You have " + scoreKeeper.getPoints() + " points!");
+            }
+        }
+        
+        /**
+         * End the game 
+         * 
+         */
+        private static void end() {
+            Dialogs.output("Thanks for using " + Dialogs.title);
+            System.exit(0);
+        }
+    }
+    
+
