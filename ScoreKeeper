@@ -1,0 +1,69 @@
+/** Required package class namespace */
+package scorekeeper;
+
+
+/*
+ * ScoreKeeper - a class to keep score in a game with encapsulated 
+ * property for the score, constructor (s) methods, and methods to: getScore ()
+ * - access and retrieve the score, add the amount from the score, decrease(amount)
+ * - subtract the amount from the score , and stillPlaying() - which returns a 
+ * a Boolean of true if the score is still above zero or false if their score
+ * drops below zero.
+ * 
+ * @author Antonio Nalevaiko
+ * @since 22 de mai. de 2024
+*/
+public class ScoreKeeper
+{
+   private int points = 0;
+   
+   /**
+    * Constructor method for the class, sets the properties of the class
+    * to starting values
+    * @param points 
+    */
+   public ScoreKeeper(int points){
+       this.points = points;
+   }
+   
+   /**
+    * Increases the total points by the passed amount
+    * 
+    * @param amount 
+    */
+   public void increase (int amount) {
+       points += amount;
+   } 
+   
+   /**
+    * Decreases the total points by the passed amount
+    * 
+    * @param amount 
+    */
+   public void decrease (int amount) {
+       points -= amount;
+   }
+   /**
+    * Determine if the game should still keep playing or not
+    * 
+    * @return 
+    */
+   public boolean keepPlaying() {
+       if (points > 0) {
+           return true;
+       }
+       else{
+           return false;
+       }
+   }
+   
+   /**
+    * Accesses the points that this score keeper class is storing 
+    * 
+    * @return 
+    */
+   public int getPoints() {
+       return points;
+   }
+
+}
